@@ -1,4 +1,5 @@
 #include "Game.h"
+
 #include <ctime>
 
 Game* Game::instance = nullptr;
@@ -24,11 +25,11 @@ void Game::init(HINSTANCE hInstance)
 	loader = Loader::getInstance();
 	loader->load(graphicDev->pD3DDevice);
 
-	logger->info("Elo Kotto");
+	logger->info("Game initialization");
 	window->show();
 }
 
-MSG Game::loop()
+MSG Game::loop() const
 {
 	MSG msg;
 	while (true)
@@ -37,7 +38,7 @@ MSG Game::loop()
 		{
 			const float elapsedTime = gameTime->calculateElapsedTime();
 			if (elapsedTime >= 0.011f)
-			{
+			{	
 				keyboard->tick(elapsedTime);
 				scene->tick(elapsedTime);
 				player->turn(mouse->calculateDelta());
@@ -58,18 +59,18 @@ MSG Game::loop()
 	return msg;
 }
 
-void Game::keyDown(WPARAM keyNumber)
+void Game::keyDown(const WPARAM keyNumber) const
 {
 	if (keyNumber == KeyCode::ESC) PostQuitMessage(0);
 	keyboard->setKeyState((KeyCode)keyNumber, true);
 }
 
-void Game::keyUp(WPARAM keyNumber)
+void Game::keyUp(const WPARAM keyNumber) const
 {
 	keyboard->setKeyState((KeyCode)keyNumber, false);
 }
 
-void Game::mouseLeftClick()
+void Game::mouseLeftClick() const
 {
 	scene->spawnBullet();
 }

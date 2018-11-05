@@ -1,6 +1,5 @@
 #include "Queue.h"
 
-
 namespace ThreadSafe
 {
 

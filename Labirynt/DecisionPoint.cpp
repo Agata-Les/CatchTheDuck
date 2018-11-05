@@ -1,22 +1,26 @@
 #include "DecisionPoint.h"
+
 #include <utility>
 #include <cstdlib>
 
-DecisionPoint::DecisionPoint(float x_, float z_, const std::vector<MoveDecision> moves_, D3DXVECTOR3 lookDirNormalized_) :
+DecisionPoint::DecisionPoint(const float x_,
+							 const float z_,
+							 std::vector<MoveDecision> moves_,
+							 const D3DXVECTOR3 lookDirNormalized_) :
 	decisionPointX(x_),
 	decisionPointZ(z_),
-	moves(std::move(moves_)),
-	lookDirNormalized(lookDirNormalized_)
+	lookDirNormalized(lookDirNormalized_),
+	moves(std::move(moves_))
 {
 }
 
-MoveDecision DecisionPoint::getRandomMove()
+MoveDecision DecisionPoint::getRandomMove() const
 {
 	const int index = std::rand() / (RAND_MAX / static_cast<unsigned short int>(moves.size()));
 	return moves[index];
 }
 
-bool DecisionPoint::isInDecisionPoint(const D3DXVECTOR3 &point)
+bool DecisionPoint::isInDecisionPoint(const D3DXVECTOR3& point) const
 {
 	if (decisionPointX - radius > point.x) return false;
 	if (decisionPointX + radius < point.x) return false;
@@ -29,7 +33,7 @@ bool DecisionPoint::isInDecisionPoint(const D3DXVECTOR3 &point)
 #if _DEBUG
 #include <sstream>
 
-const std::string DecisionPoint::debugSTR()
+std::string DecisionPoint::debugSTR() const
 {
 	std::stringstream ss;
 	ss << "Decision Point x = " << decisionPointX << " z = " << decisionPointZ << " Moves = ";

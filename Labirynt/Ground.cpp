@@ -1,12 +1,15 @@
 #include "Ground.h"
 #include "Vertex.h"
 #include "Macros.h"
+
 #include <d3dx9.h>
+
 #include <cmath>
 #include <tchar.h>
 
-Ground::Ground(IDirect3DDevice9 *pD3DDevice_, float groundSize)
-	: numVertexGround(static_cast<int>(4.0f * 2.5f * groundSize * 2.5f * groundSize)), pD3DDevice(pD3DDevice_)
+Ground::Ground(IDirect3DDevice9* pD3DDevice_, const float groundSize)
+	: pD3DDevice(pD3DDevice_),
+	  numVertexGround(static_cast<int>(4.0f * 2.5f * groundSize * 2.5f * groundSize))	  
 {
 	pD3DDevice->CreateVertexBuffer(numVertexGround * sizeof(Vertex), 0, FVF_VERTEX, D3DPOOL_DEFAULT, &pVBground, NULL);
 	D3DXCreateTextureFromFile(pD3DDevice, _T("Resources/grass.jpg"), &pTextureGrass);
@@ -19,7 +22,7 @@ Ground::~Ground()
 	SAFE_RELEASE(pTextureGrass);
 }
 
-void Ground::render()
+void Ground::render() const
 {
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -34,14 +37,13 @@ void Ground::render()
 	}
 }
 
-void Ground::create(float groundSizeXZ) 
+void Ground::create(float groundSizeXZ) const
 {
 	const float from = -groundSizeXZ / 2.0f;
-	const float to = groundSizeXZ / 2.0f;
 	const float magicProportion = groundSizeXZ * 100.0f / 80.0f;
 	const float quadSize = groundSizeXZ / magicProportion;
 	float lowerValue = from;
-	float greaterValue = to;
+	float greaterValue = groundSizeXZ / 2.0f;
 	unsigned int index = 0;
 
 	Vertex* pVertices;

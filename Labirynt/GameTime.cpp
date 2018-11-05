@@ -1,4 +1,5 @@
 #include "GameTime.h"
+
 #include <Windows.h>
 
 GameTime::GameTime()
@@ -31,7 +32,7 @@ float GameTime::calculateElapsedTime()
 	return elapsedTime;
 }
 
-float GameTime::getTotalGameTime()
+float GameTime::getTotalGameTime() const
 {
 	return totalGameTime;
 }

@@ -1,10 +1,12 @@
 #include "Skybox.h"
 #include "Vertex.h"
 #include "Macros.h"
+
 #include <d3dx9.h>
 #include <tchar.h>
 
-Skybox::Skybox(IDirect3DDevice9 *pD3DDevice_) : pD3DDevice(pD3DDevice_)
+Skybox::Skybox(IDirect3DDevice9* pD3DDevice_)
+	: pD3DDevice(pD3DDevice_)
 {
 	pD3DDevice->CreateVertexBuffer(numOfVertices * sizeof(Vertex), 0, FVF_VERTEX, D3DPOOL_DEFAULT, &pVB, NULL);
 	pD3DDevice->CreateIndexBuffer(numOfIndices * sizeof(short), 0, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &pIB, NULL);
@@ -19,7 +21,7 @@ Skybox::~Skybox()
 	SAFE_RELEASE(pTextureSkybox);
 }
 
-void Skybox::render()
+void Skybox::render() const
 {
 	D3DXMATRIXA16 matWorld;
 	D3DXMatrixIdentity(&matWorld);
@@ -33,7 +35,7 @@ void Skybox::render()
 	pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, numOfVertices, 0, 12);
 }
 
-void Skybox::create()
+void Skybox::create() const
 {
 	Vertex* pVertices;
 

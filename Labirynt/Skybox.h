@@ -1,16 +1,17 @@
 #pragma once
+
 #include <d3d9.h>
 
 class Skybox
 {
 public:
-	Skybox(IDirect3DDevice9 *pD3DDevice_);
+	Skybox(IDirect3DDevice9* pD3DDevice_);
 	~Skybox();
 
-	void render();
+	void render() const;
 
 private:
-	void create();
+	void create() const;
 
 	IDirect3DVertexBuffer9 *pVB = nullptr;
 	IDirect3DIndexBuffer9 *pIB = nullptr;

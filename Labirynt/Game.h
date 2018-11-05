@@ -9,6 +9,7 @@
 #include "Keyboard.h"
 #include "Logger.h"
 #include "Loader.h"
+
 #include <memory>
 
 class Game
@@ -19,10 +20,10 @@ public:
 	static Game* getInstance();
 
 	void init(HINSTANCE hInstance);
-	MSG loop();
-	void keyDown(WPARAM keyNumber);
-	void keyUp(WPARAM keyNumber);
-	void mouseLeftClick();
+	MSG loop() const;
+	void keyDown(const WPARAM keyNumber) const;
+	void keyUp(const WPARAM keyNumber) const;
+	void mouseLeftClick() const;
 
 	std::unique_ptr<Window> window;
 	std::unique_ptr<GraphicDevice> graphicDev;

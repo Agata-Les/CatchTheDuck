@@ -11,7 +11,7 @@ Crosshair::~Crosshair()
 	SAFE_RELEASE(pLine);
 }
 
-void Crosshair::render()
+void Crosshair::render() const
 {
 	drawLine(centerPoint.x + 15.0f, centerPoint.y + 15.0f, centerPoint.x + 3.0f, centerPoint.y + 3.0f);
 	drawLine(centerPoint.x - 15.0f, centerPoint.y + 15.0f, centerPoint.x - 3.0f, centerPoint.y + 3.0f);
@@ -33,9 +33,9 @@ void Crosshair::initialize()
 	pLine->SetGLLines(true);
 }
 
-void Crosshair::drawLine(float p1x, float p1y, float p2x, float p2y)
+void Crosshair::drawLine(const float p1x, const float p1y, const float p2x, const float p2y) const
 {
-	D3DCOLOR color = D3DCOLOR_XRGB(255, 0, 0);
+	const D3DCOLOR color = D3DCOLOR_XRGB(255, 0, 0);
 	D3DXVECTOR2 vLine[2];
 
 	vLine[0].x = p1x;

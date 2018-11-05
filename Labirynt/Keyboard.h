@@ -14,9 +14,9 @@ enum KeyCode
 class Keyboard
 {
 public:
-	void tick(float deltaTime);
-	bool getKeyState(KeyCode keyCode);
-	void setKeyState(KeyCode keyCode, bool newState);
+	void tick(const float deltaTime);
+	bool getKeyState(const KeyCode keyCode);
+	void setKeyState(const KeyCode keyCode, const bool newState);
 
 private:
 	std::map<KeyCode, bool> state;

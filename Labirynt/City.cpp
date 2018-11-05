@@ -1,16 +1,18 @@
 #include "City.h"
-#include <algorithm>
+
 #include <sstream>
 
-City::City(IDirect3DDevice9 *pD3DDevice_, const std::vector<std::vector<float>> &cityMatrix_)
-	: pD3DDevice(pD3DDevice_), cityMatrix(cityMatrix_)
+City::City(IDirect3DDevice9* pD3DDevice_,
+		   const std::vector<std::vector<float>>& cityMatrix_)
+	: pD3DDevice(pD3DDevice_),
+	  cityMatrix(cityMatrix_)
 {
 	loadCityMatrix();
 	construct();
 	constructDecisionPoints();
 }
 
-void City::render()
+void City::render() const
 {
 	ground->render();
 
@@ -27,7 +29,7 @@ std::shared_ptr<DecisionPoint> City::getAIDecisionPoint_RANDOM()
 	std::shared_ptr<DecisionPoint> dp = nullptr;
 
 	do {
-		unsigned int index = std::rand() / (RAND_MAX / decisionPointsContainer.size());
+		const unsigned int index = std::rand() / (RAND_MAX / decisionPointsContainer.size());
 		dp = decisionPointsContainer[index];
 
 #if _DEBUG
@@ -100,22 +102,22 @@ void City::constructDecisionPoints()
 	}
 }
 
-std::vector<MoveDecision> City::getPossibleMoves(unsigned int i, unsigned int j)
+std::vector<MoveDecision> City::getPossibleMoves(unsigned int i, unsigned int j) const
 {
 	const std::vector<MoveDecision> movesForwardLeft{ MoveDecision::FORWARD, MoveDecision::LEFT };
 	const std::vector<MoveDecision> movesAnyDirection{ MoveDecision::FORWARD, MoveDecision::LEFT, MoveDecision::RIGHT };
 	const std::vector<MoveDecision> movesLeft{ MoveDecision::LEFT };
 
-	bool isFirstRow = (i == 0);
-	bool isSecondRow = (i == 1);
-	bool isPenultimateRow = (i == numberOfRows * 2 - 1);
-	bool isLastRow = (i == numberOfRows * 2);
-	bool isEvenRow = (i % 2 == 0);
-	bool isOddRow = (i % 2 != 0);
+	const bool isFirstRow = (i == 0);
+	const bool isSecondRow = (i == 1);
+	const bool isPenultimateRow = (i == numberOfRows * 2 - 1);
+	const bool isLastRow = (i == numberOfRows * 2);
+	const bool isEvenRow = (i % 2 == 0);
+	const bool isOddRow = (i % 2 != 0);
 
-	bool isFirstPointInRow = (j == 0);
-	bool isLastInOddRow = (j == numberOfBuildingsInRow);
-	bool isLastInEvenRow = (j == numberOfBuildingsInRow - 1);
+	const bool isFirstPointInRow = (j == 0);
+	const bool isLastInOddRow = (j == numberOfBuildingsInRow);
+	const bool isLastInEvenRow = (j == numberOfBuildingsInRow - 1);
 
 	if (isFirstRow)
 	{
@@ -160,20 +162,20 @@ std::vector<MoveDecision> City::getPossibleMoves(unsigned int i, unsigned int j)
 	return movesLeft;
 }
 
-D3DXVECTOR3 City::getLookDirection(unsigned int i, unsigned int j)
+D3DXVECTOR3 City::getLookDirection(unsigned int i, unsigned int j) const
 {
-	D3DXVECTOR3 directionLeft(-1.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 directionRight(1.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 directionUp(0.0f, 0.0f, 1.0f);
-	D3DXVECTOR3 directionDown(0.0f, 0.0f, -1.0f);
+	const D3DXVECTOR3 directionLeft(-1.0f, 0.0f, 0.0f);
+	const D3DXVECTOR3 directionRight(1.0f, 0.0f, 0.0f);
+	const D3DXVECTOR3 directionUp(0.0f, 0.0f, 1.0f);
+	const D3DXVECTOR3 directionDown(0.0f, 0.0f, -1.0f);
 
-	bool isFirstRow = (i == 0);
-	bool isSecondRow = (i == 1);
-	bool isPenultimateRow = (i == numberOfRows * 2 - 1);
-	bool isLastRow = (i == numberOfRows * 2);
-	bool isEvenRow = (i % 2 == 0);
-	bool isOddRow = (i % 2 != 0);
-	bool isFirstPointInRow = (j == 0);
+	const bool isFirstRow = (i == 0);
+	const bool isSecondRow = (i == 1);
+	const bool isPenultimateRow = (i == numberOfRows * 2 - 1);
+	const bool isLastRow = (i == numberOfRows * 2);
+	const bool isEvenRow = (i % 2 == 0);
+	const bool isOddRow = (i % 2 != 0);
+	const bool isFirstPointInRow = (j == 0);
 
 	if (isFirstRow)
 	{

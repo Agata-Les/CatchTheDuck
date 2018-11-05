@@ -8,12 +8,11 @@ public:
 	Mouse();
 	~Mouse() = default;
 
-	D3DXVECTOR2 calculateDelta();
+	D3DXVECTOR2 calculateDelta() const;
 
 private:
-	void updateCursorPos();
+	void updateCursorPos() const;
 
-	D3DXVECTOR2 centerPos;
-	D3DXVECTOR2 deltaPos;
+	const D3DXVECTOR2 centerPos { 800.0f, 600.0f };
 	const float mouseSensitivity = 10.0f;
 };

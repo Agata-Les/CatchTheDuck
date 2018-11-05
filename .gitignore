@@ -1,0 +1,10 @@
+.vs/
+Debug/
+Labirynt.VC.VC.opendb
+Labirynt.VC.db
+Labirynt/Debug/*
+Labirynt/Release/*
+Labirynt/Labirynt.vcxproj.user
+Labirynt/log.txt
+Release/
+

@@ -1,12 +1,13 @@
 #include "Mouse.h"
+
 #include <Windows.h>
 
-Mouse::Mouse() : centerPos(800.0f, 600.0f)
+Mouse::Mouse()
 {
 	updateCursorPos();
 }
 
-D3DXVECTOR2 Mouse::calculateDelta()
+D3DXVECTOR2 Mouse::calculateDelta() const
 {
 	POINT point;
 	GetCursorPos(&point);
@@ -20,7 +21,7 @@ D3DXVECTOR2 Mouse::calculateDelta()
 	return delta / mouseSensitivity;
 }
 
-void Mouse::updateCursorPos()
+void Mouse::updateCursorPos() const
 {
 	SetCursorPos((int)centerPos.x, (int)centerPos.y);
 }

@@ -1,7 +1,7 @@
 #include "Keyboard.h"
 #include "Game.h"
 
-void Keyboard::tick(float deltaTime)
+void Keyboard::tick(const float deltaTime)
 {
 	if (getKeyState(KeyCode::W)) Game::getInstance()->player->move(deltaTime);
 	if (getKeyState(KeyCode::S)) Game::getInstance()->player->move(-deltaTime);
@@ -9,15 +9,15 @@ void Keyboard::tick(float deltaTime)
 	if (getKeyState(KeyCode::A)) Game::getInstance()->player->moveSideway(deltaTime);
 }
 
-bool Keyboard::getKeyState(KeyCode keyCode)
+bool Keyboard::getKeyState(const KeyCode keyCode)
 {
-	auto lookUpKey = state.find(keyCode);
+	const auto lookUpKey = state.find(keyCode);
 	if (lookUpKey == state.end()) return false;
 
 	return lookUpKey->second;
 }
 
-void Keyboard::setKeyState(KeyCode keyCode, bool newState)
+void Keyboard::setKeyState(const KeyCode keyCode, const bool newState)
 {
 	state[keyCode] = newState;
 }

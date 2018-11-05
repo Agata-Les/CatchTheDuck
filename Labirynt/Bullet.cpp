@@ -3,13 +3,21 @@
 #include <tchar.h>
 #include <sstream>
 
-Bullet::Bullet(IDirect3DDevice9 *pD3DDevice_, D3DXVECTOR3 position_, D3DXVECTOR3 lookDirNormalized_, D3DXVECTOR3 upAxis_)
-	: pD3DDevice(pD3DDevice_), position(position_), lookDirNormalized(lookDirNormalized_), upAxis(upAxis_),
-	gravityAxis(0.0f, -10.0f, 0.0f), originPosition(position_), previousPosition(position_)
+Bullet::Bullet(IDirect3DDevice9* pD3DDevice_,
+			   D3DXVECTOR3 position_,
+			   D3DXVECTOR3 lookDirNormalized_,
+			   D3DXVECTOR3 upAxis_)
+	: pD3DDevice(pD3DDevice_),
+	  position(position_),
+	  previousPosition(position_),
+	  lookDirNormalized(lookDirNormalized_),
+	  upAxis(upAxis_),
+	  originPosition(position_),
+	  gravityAxis(0.0f, -10.0f, 0.0f)
 {
 }
 
-void Bullet::render()
+void Bullet::render() const
 {
 	D3DXMATRIXA16 matWorld, matTransl, matScale;
 	D3DXMatrixTranslation(&matTransl, position.x, position.y, position.z);
@@ -24,12 +32,12 @@ void Bullet::render()
 	}
 }
 
-void Bullet::tick(float deltaTime)
+void Bullet::tick(const float deltaTime)
 {
 	move(deltaTime);
 }
 
-void Bullet::move(float deltaTime)
+void Bullet::move(const float deltaTime)
 {
 	if (position.y <= 0.0f) return;
 

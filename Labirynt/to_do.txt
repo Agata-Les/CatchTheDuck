@@ -1,0 +1,28 @@
+1. Includes order
+2. * and & stick to type f.ex. IDirect3DDevice9* pD3DDevice_
+3. Avoid repeating the return type from the declaration; use a braced initializer list instead, f.ex:
+	 return CollisionBox(ULF, DLF, DLB, DRF); -> return { ULF, DLF, DLB, DRF };
+4. 
+
+
+
+TO DO:
+
+get_moves_direction
+get_possible_moves -> to refactor
+
+all textures to Loader!
+
+UI - initialize -> fonts to refactor
+
+UI - all draw methods to refactor (maybe struct?)
+
+D3DVectors const and &
+
+Game to shared_ptr
+
+graphic device - render - matrixProj
+
+recalculate 60 fps and speed of player and bird because it is fucked up :)
+
+Change fixed window size

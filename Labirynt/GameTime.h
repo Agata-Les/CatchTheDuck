@@ -8,7 +8,7 @@ public:
 
 	void update();
 	float calculateElapsedTime();
-	float getTotalGameTime();
+	float getTotalGameTime() const;
 	
 private:
 	float elapsedTime = 0.0f;

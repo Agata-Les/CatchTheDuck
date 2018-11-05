@@ -1,11 +1,14 @@
 #include "UI.h"
 #include "Game.h"
 #include "Macros.h"
+
 #include <d3dx9.h>
+
 #include <tchar.h>
 #include <sstream>
 
-UI::UI(IDirect3DDevice9 * pD3DDevice_) : pD3DDevice(pD3DDevice_)
+UI::UI(IDirect3DDevice9* pD3DDevice_)
+	: pD3DDevice(pD3DDevice_)
 {
 	initialize();
 }
@@ -18,7 +21,7 @@ UI::~UI()
 	SAFE_RELEASE(pFontTime);
 }
 
-void UI::render()
+void UI::render() const
 {
 	const unsigned short int numberOfBirdsHit = Game::getInstance()->counterOfDeadBirds;
 
@@ -44,8 +47,8 @@ void UI::render()
 
 		D3DVIEWPORT9 viewPort;
 		pD3DDevice->GetViewport(&viewPort);
-		int centerPointX = viewPort.Width / 2;
-		int centerPointY = viewPort.Height / 2;
+		const int centerPointX = viewPort.Width / 2;
+		const int centerPointY = viewPort.Height / 2;
 
 		drawText(_T("You win"), centerPointX - 150, centerPointY - 150, 100, 100, pFontWin, D3DCOLOR_XRGB(255, 0, 0));
 		drawTextTIME();
@@ -102,7 +105,7 @@ void UI::initialize()
 		&pFontTime);
 }
 
-void UI::drawLine(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color)
+void UI::drawLine(const int p1x, const int p1y, const int p2x, const int p2y, const D3DCOLOR color) const
 {
 	D3DXVECTOR2 vLine[2];
 
@@ -116,13 +119,13 @@ void UI::drawLine(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color)
 	pLine->End();
 }
 
-void UI::drawCross(int centerX, int centerY, D3DCOLOR color)
+void UI::drawCross(const int centerX, const int centerY, const D3DCOLOR color) const
 {
 	drawLine(centerX - 25, centerY - 25, centerX + 25, centerY + 25, color);
 	drawLine(centerX - 25, centerY + 25, centerX + 25, centerY - 25, color);
 }
 
-void UI::drawRectangle(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color)
+void UI::drawRectangle(const int p1x, const int p1y, const int p2x, const int p2y, const D3DCOLOR color) const
 {
 	D3DRECT rect{ p1x, p1y, p2x, p2y };
 	pD3DDevice->Clear(1, &rect, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, color, 1.0f, 0);
@@ -133,7 +136,13 @@ void UI::drawRectangle(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color)
 	drawLine(p2x, p1y, p1x, p1y);
 }
 
-void UI::drawText(std::wstring text, int x, int y, int width, int height, ID3DXFont *pFont, DWORD color)
+void UI::drawText(const std::wstring&& text,
+				  const int x,
+				  const int y,
+				  const int width,
+				  const int height,
+				  ID3DXFont* pFont,
+				  const DWORD color) const
 {
 	RECT fontRect;
 	SetRect(&fontRect, x, y, width, height);
@@ -147,14 +156,14 @@ void UI::drawText(std::wstring text, int x, int y, int width, int height, ID3DXF
 		color);
 }
 
-void UI::drawTextTIME()
+void UI::drawTextTIME() const
 {
 	static float totalGameTime = Game::getInstance()->gameTime->getTotalGameTime();
 
 	D3DVIEWPORT9 viewPort;
 	pD3DDevice->GetViewport(&viewPort);
-	int centerPointX = viewPort.Width / 2;
-	int centerPointY = viewPort.Height / 2;
+	const int centerPointX = viewPort.Width / 2;
+	const int centerPointY = viewPort.Height / 2;
 
 	std::wstringstream wss;
 	wss.precision(5);

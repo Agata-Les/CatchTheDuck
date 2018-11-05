@@ -1,18 +1,22 @@
 #pragma once
+
 #include <d3d9.h>
 #include <d3dx9.h>
 
 class Bullet
 {
 public:
-	Bullet(IDirect3DDevice9 *pD3DDevice_, D3DXVECTOR3 position_, D3DXVECTOR3 lookDirNormalized_, D3DXVECTOR3 upAxis_);
+	Bullet(IDirect3DDevice9* pD3DDevice_,
+		   D3DXVECTOR3 position_,
+		   D3DXVECTOR3 lookDirNormalized_,
+		   D3DXVECTOR3 upAxis_);
 	~Bullet() = default;
 
-	void render();
-	void tick(float deltaTime);
+	void render() const;
+	void tick(const float deltaTime);
 
 private:
-	void move(float deltaTime);
+	void move(const float deltaTime);
 
 	IDirect3DDevice9 *pD3DDevice = nullptr;
 

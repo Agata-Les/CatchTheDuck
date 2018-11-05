@@ -1,5 +1,7 @@
 #pragma once
+
 #include <d3dx9.h>
+
 #include <vector>
 #include <string>
 
@@ -13,18 +15,21 @@ enum MoveDecision
 class DecisionPoint
 {
 public:
-	DecisionPoint(float x_, float z_, const std::vector<MoveDecision> moves_, D3DXVECTOR3 lookDirNormalized_);
+	DecisionPoint(const float x_,
+				  const float z_,
+				  std::vector<MoveDecision> moves_,
+				  const D3DXVECTOR3 lookDirNormalized_);
 	~DecisionPoint() = default;
 
-	MoveDecision getRandomMove();
-	bool isInDecisionPoint(const D3DXVECTOR3 &point);
+	MoveDecision getRandomMove() const;
+	bool isInDecisionPoint(const D3DXVECTOR3& point) const;
 
-	float decisionPointX = 0.0f;
-	float decisionPointZ = 0.0f;
+	const float decisionPointX;
+	const float decisionPointZ;
 	const D3DXVECTOR3 lookDirNormalized;
 
 #if _DEBUG
-	const std::string debugSTR();
+	std::string debugSTR() const;
 #endif
 	
 private:

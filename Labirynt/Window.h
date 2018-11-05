@@ -1,4 +1,5 @@
 #pragma once
+
 #include <Windows.h>
 #include <tchar.h>
 
@@ -8,12 +9,12 @@ public:
 	Window(HINSTANCE hInstance);
 	~Window();
 
-	void show();
+	void show() const;
 
 	HWND hWnd;
 
 private:
-	void registerWindowClass();
+	void registerWindowClass() const;
 	void createWindow();
 
 	HINSTANCE hInstance;

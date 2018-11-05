@@ -2,10 +2,16 @@
 #include "Game.h"
 #include "Macros.h"
 #include <tchar.h>
-#include <sstream>
 
-Bird::Bird(IDirect3DDevice9 *pD3DDevice_, D3DXVECTOR3 position_, D3DXVECTOR3 lookAt_, std::vector<std::shared_ptr<DecisionPoint>> &decisionPointsContainer_) :
-	pD3DDevice(pD3DDevice_), position(position_), lookAt(lookAt_), upAxis(0.0f, 1.0f, 0.0f), decisionPointsContainer(decisionPointsContainer_)
+Bird::Bird(IDirect3DDevice9 *pD3DDevice_,
+		   D3DXVECTOR3 position_,
+		   D3DXVECTOR3 lookAt_,
+		   const std::vector<std::shared_ptr<DecisionPoint>>& decisionPointsContainer_)
+	: pD3DDevice(pD3DDevice_),
+	  position(position_),
+	  lookAt(lookAt_),
+	  upAxis(0.0f, 1.0f, 0.0f),
+	  decisionPointsContainer(decisionPointsContainer_)
 {
 	D3DXCreateTextureFromFile(pD3DDevice, _T("Resources/feathers.png"), &pTextureBird);
 	D3DXLoadMeshFromXW(_T("Resources/unitsphere.X"), D3DXMESH_SYSTEMMEM, pD3DDevice, NULL, NULL, NULL, &numMaterials, &ppMesh);
@@ -20,7 +26,7 @@ Bird::~Bird()
 	SAFE_RELEASE(pTextureBird);
 }
 
-void Bird::render()
+void Bird::render() const
 {
 	D3DXMATRIXA16 matWorld, matTransl, matScale;
 	D3DXMatrixTranslation(&matTransl, position.x, position.y, position.z);
@@ -35,7 +41,7 @@ void Bird::render()
 	}
 }
 
-void Bird::tick(float deltaTime)
+void Bird::tick(const float deltaTime)
 {
 	std::shared_ptr<DecisionPoint> dp = getAIDecisionPoint();
 
@@ -64,16 +70,16 @@ CollisionBox Bird::getCollisionBox()
 	D3DXVECTOR3 DLB(position.x - r, position.y - r, position.z + r);
 	D3DXVECTOR3 ULF(position.x - r, position.y + r, position.z - r);
 
-	return CollisionBox(ULF, DLF, DLB, DRF);
+	return { ULF, DLF, DLB, DRF };
 }
 
-void Bird::move(float deltaTime)
+void Bird::move(const float deltaTime)
 {
 	position += lookDirNormalized * linearSpeed * deltaTime;
 	lookAt += lookDirNormalized * linearSpeed * deltaTime;
 }
 
-void Bird::turn(float deltaTime)
+void Bird::turn(const float deltaTime)
 {
 	const float alpha = angleSpeed * deltaTime;
 
@@ -100,7 +106,7 @@ void Bird::turnRight(float deltaTime)
 	move(deltaTime);
 }
 
-void Bird::teleportToDecisionPoint(std::shared_ptr<DecisionPoint> dp)
+void Bird::teleportToDecisionPoint(const std::shared_ptr<DecisionPoint> dp)
 {
 	position.x = dp->decisionPointX;
 	position.z = dp->decisionPointZ;
@@ -113,7 +119,7 @@ void Bird::teleportToDecisionPoint(std::shared_ptr<DecisionPoint> dp)
 	lookAt = position + lookDirNormalized;
 }
 
-std::shared_ptr<DecisionPoint> Bird::getAIDecisionPoint()
+std::shared_ptr<DecisionPoint> Bird::getAIDecisionPoint() const
 {
 	for (auto& dp : decisionPointsContainer)
 	{

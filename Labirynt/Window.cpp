@@ -36,7 +36,7 @@ Window::~Window()
 	UnregisterClass(windowNameClass, hInstance);
 }
 
-void Window::registerWindowClass()
+void Window::registerWindowClass() const
 {
 	WNDCLASSEX wc;
 	ZeroMemory(&wc, sizeof(WNDCLASSEX));
@@ -63,7 +63,7 @@ void Window::createWindow()
 		NULL);
 }
 
-void Window::show()
+void Window::show() const
 {
 	ShowCursor(false);
 	ShowWindow(hWnd, SW_SHOWDEFAULT);

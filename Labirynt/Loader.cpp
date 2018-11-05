@@ -1,5 +1,6 @@
 #include "Loader.h"
 #include "Macros.h"
+
 #include <tchar.h>
 
 std::shared_ptr<Loader> Loader::instance = nullptr;
@@ -17,7 +18,7 @@ std::shared_ptr<Loader> Loader::getInstance()
 	return instance;
 }
 
-void Loader::load(IDirect3DDevice9 *pD3DDevice)
+void Loader::load(IDirect3DDevice9* pD3DDevice)
 {
 	D3DXCreateTextureFromFile(pD3DDevice, _T("Resources/bullet.jpg"), &pTextureBullet);
 	D3DXLoadMeshFromXW(_T("Resources/unitsphere.X"), D3DXMESH_SYSTEMMEM, pD3DDevice, NULL, NULL, NULL, &bulletNumMaterials, &bulletMesh);

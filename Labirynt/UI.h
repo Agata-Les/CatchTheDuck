@@ -1,24 +1,42 @@
 #pragma once
+
 #include <d3d9.h>
 #include <d3dx9.h>
+
 #include <string>
 
 class UI
 {
 public:
-	UI(IDirect3DDevice9 * pD3DDevice_);
+	UI(IDirect3DDevice9* pD3DDevice_);
 	~UI();
 
-	void render();
+	void render() const;
 
 private:
 	void initialize();
 
-	void drawLine(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
-	void drawCross(int centerX, int centerY, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
-	void drawRectangle(int p1x, int p1y, int p2x, int p2y, D3DCOLOR color = D3DCOLOR_XRGB(0, 0, 0));
-	void drawText(std::wstring text, int x, int y, int width, int height, ID3DXFont *pFont, DWORD color);
-	void drawTextTIME();
+	void drawLine(const int p1x,
+				  const int p1y,
+				  const int p2x,
+				  const int p2y,
+				  const D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255)) const;
+	void drawCross(const int centerX,
+				   const int centerY,
+				   const D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255)) const;
+	void drawRectangle(const int p1x,
+					   const int p1y,
+					   const int p2x,
+					   const int p2y,
+					   const D3DCOLOR color = D3DCOLOR_XRGB(0, 0, 0)) const;
+	void drawText(const std::wstring&& text,
+				  const int x,
+				  const int y,
+				  const int width,
+				  const int height,
+				  ID3DXFont* pFont,
+				  const DWORD color) const;
+	void drawTextTIME() const;
 
 	IDirect3DDevice9 * pD3DDevice = nullptr;
 	ID3DXLine *pLine = nullptr;
