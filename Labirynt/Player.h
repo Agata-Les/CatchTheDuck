@@ -11,7 +11,7 @@ public:
 	const float eyePosition = 1.0f;
 	D3DXVECTOR3 position { 0.0f, eyePosition, 0.0f };
 	D3DXVECTOR3 lookAt { 1.0f, eyePosition, 0.0f };
-	D3DXVECTOR3 upAxis { 0.0f, 1.0f, 0.0f };
+	const D3DXVECTOR3 upAxis { 0.0f, 1.0f, 0.0f };
 	D3DXVECTOR3 lookDirNormalized;
 	
 	void move(const float deltaTime);

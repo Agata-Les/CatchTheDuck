@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "Game.h"
 
+#include <cmath>
+
 Player::Player()
 {
 	lookDirNormalized = lookAt - position;

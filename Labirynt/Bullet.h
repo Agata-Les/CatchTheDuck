@@ -18,7 +18,7 @@ public:
 private:
 	void move(const float deltaTime);
 
-	IDirect3DDevice9 *pD3DDevice = nullptr;
+	IDirect3DDevice9* pD3DDevice = nullptr;
 
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 previousPosition;
