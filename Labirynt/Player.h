@@ -20,4 +20,7 @@ public:
 
 private:
 	const float velocity = 10.0f;
+	float verticalAngle = 0.0f;
+
+	D3DXVECTOR3 calculateUpDownRotationVector() const;
 };
